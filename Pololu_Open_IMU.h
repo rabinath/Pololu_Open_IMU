@@ -49,12 +49,12 @@ Based on the Madgwick algorithm found at:
 #define inverseYRange (float)(2.0 / (compassYMax - compassYMin))
 #define inverseZRange (float)(2.0 / (compassZMax - compassZMin))
 
-class IMU {
+class Pololu_Open_IMU {
 public:
 	float pitch,roll,yaw;
 	
-	IMU(L3G *gyro, LSM303 *compass) : gyro(gyro), compass(compass) {};
-	virtual ~IMU(){};
+	Pololu_Open_IMU(L3G *gyro, LSM303 *compass) : gyro(gyro), compass(compass) {};
+	virtual ~Pololu_Open_IMU(){};
 	
 	void setup();
 	void loop();

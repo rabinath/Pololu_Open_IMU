@@ -11,7 +11,7 @@ Based on the Madgwick algorithm found at:
  */
 #include "Pololu_Open_IMU.h"
 
-void IMU::loop(){
+void Pololu_Open_IMU::loop(){
 
   if (micros() - timer >= 5000){
     //this runs in 4ms on the MEGA 2560
@@ -46,7 +46,7 @@ void IMU::loop(){
   }
 }
 
-void IMU::IMUinit(){
+void Pololu_Open_IMU::IMUinit(){
 
   //init devices
   compass->init();
@@ -169,7 +169,7 @@ void IMU::IMUinit(){
   
 }
 
-void IMU::IMUupdate(float *dt) {
+void Pololu_Open_IMU::IMUupdate(float *dt) {
   static float gx;
   static float gy;
   static float gz;
@@ -258,7 +258,7 @@ void IMU::IMUupdate(float *dt) {
   q3 *= recipNorm;
 }
 
-void IMU::AHRSupdate(float *dt) {
+void Pololu_Open_IMU::AHRSupdate(float *dt) {
   static float gx;
   static float gy;
   static float gz;
@@ -379,7 +379,7 @@ void IMU::AHRSupdate(float *dt) {
   q3 *= recipNorm;
 }
 
-void IMU::GetEuler(void){
+void Pololu_Open_IMU::GetEuler(void){
   roll = ToDeg(fastAtan2(2 * (q0 * q1 + q2 * q3),1 - 2 * (q1 * q1 + q2 * q2)));
   pitch = ToDeg(asin(2 * (q0 * q2 - q3 * q1)));
   yaw = ToDeg(fastAtan2(2 * (q0 * q3 + q1 * q2) , 1 - 2* (q2 * q2 + q3 * q3)));
@@ -389,7 +389,7 @@ void IMU::GetEuler(void){
 
 }
 
-float IMU::fastAtan2( float y, float x)
+float Pololu_Open_IMU::fastAtan2( float y, float x)
 {
   static float atan;
   static float z;
@@ -417,7 +417,7 @@ float IMU::fastAtan2( float y, float x)
   return atan;
 }
 
-float IMU::invSqrt(float number) {
+float Pololu_Open_IMU::invSqrt(float number) {
   volatile long i;
   volatile float x, y;
   volatile const float f = 1.5F;
@@ -431,11 +431,11 @@ float IMU::invSqrt(float number) {
   return y;
 }
 
-void IMU::Smoothing(float *raw, float *smooth){
+void Pololu_Open_IMU::Smoothing(float *raw, float *smooth){
   *smooth = (*raw * (0.15)) + (*smooth * 0.85);
 }
 
-void IMU::setup(){
+void Pololu_Open_IMU::setup(){
 //  Wire.begin();
 //  TWBR = ((F_CPU / 400000) - 16) / 2;//set the I2C speed to 400KHz
   IMUinit();
